@@ -1,4 +1,5 @@
 import { CategoryTab } from "./CategoryTab";
+import { ActivityGenerator } from "./ActivityGenerator";
 import { CATEGORIES } from "./constants/CATEGORIES";
 import { Header } from "./Header";
 import { useState } from "react";
@@ -19,7 +20,7 @@ export default function App() {
           display: "flex",
           justifyContent: "center",
           flexDirection: "row",
-          marginBlock: "10px",
+          marginBlock: "20px",
         }}
       >
         {CATEGORIES.map((category) => (
@@ -31,6 +32,7 @@ export default function App() {
           />
         ))}
       </div>
+      <ActivityGenerator />
     </>
   );
 }

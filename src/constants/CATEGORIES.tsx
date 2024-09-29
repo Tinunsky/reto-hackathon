@@ -6,3 +6,5 @@ export const CATEGORIES = [
     "Relaxació",
     "Treball intens",
   ];
+
+  
