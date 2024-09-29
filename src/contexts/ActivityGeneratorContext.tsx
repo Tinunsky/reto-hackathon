@@ -1,13 +1,29 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
-// type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+
+type ActivityDetails = {
+  activity: string,
+  availability: number,
+  type: string,
+  participants: number,
+  price: number,
+  accessibility: string,
+  duration: string,
+  kidFriendly: boolean,
+  link: string,
+  key: string,
+};
 
 const defaultActivityGeneratorContext = {
-  getActivities: () => {},
+  getActivities: (() => { }) as (id: string) => void,
+  ActivitiesList: [] as ActivityDetails[],
+  setActivitiesList: (() => { }) as SetState<ActivityDetails[]>,
 };
 
 export const ActivityGeneratorContext = createContext<
-  typeof defaultActivityGeneratorContext>(defaultActivityGeneratorContext);
+  typeof defaultActivityGeneratorContext
+>(defaultActivityGeneratorContext);
 
 const hardcodedData = [
   {
@@ -41,19 +57,31 @@ export const ActivityGeneratorProvider = ({
 }: {
   children: ReactNode;
 }) => {
+
+  const [ActivitiesList, setActivitiesList] = useState<ActivityDetails[]>([])
+
   function getActivities() {
-    fetch("api/random")
+    fetch("api/filter?type=education")
       .then((response) => response.json())
       .then((data) => {
         console.log("activity SUCCESS!", data);
+        setActivitiesList(data)
       })
-      .catch((error) => console.log("activity ERROR", hardcodedData));
+      .catch((error) => {console.log("activity ERROR", hardcodedData);
+      setActivitiesList(hardcodedData)});
   }
+  
+  useEffect(() => {
+    console.log("ActivitiesList has been updated:", ActivitiesList);
+  }, [ActivitiesList]);  
+
 
   return (
     <ActivityGeneratorContext.Provider
       value={{
         getActivities,
+        ActivitiesList,
+        setActivitiesList,
       }}
     >
       {children}

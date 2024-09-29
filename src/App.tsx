@@ -3,10 +3,12 @@ import { ActivityGenerator } from "./ActivityGenerator";
 import { CATEGORIES } from "./constants/CATEGORIES";
 import { Header } from "./Header";
 import { useState } from "react";
+import { ActivityDisplay } from "./ActivityDisplay";
 
 export default function App() {
 
-  const [selectedCategoryName, setSelectedCategoryName] = useState("");
+  const [selectedCategoryName, setSelectedCategoryName] = useState(""); 
+
 
   const categorySelected = (categoryName: string) => {
     setSelectedCategoryName(categoryName);
@@ -33,6 +35,7 @@ export default function App() {
         ))}
       </div>
       <ActivityGenerator />
+      <ActivityDisplay />
     </>
   );
 }

@@ -12,7 +12,7 @@ export function ActivityGenerator() {
         flexDirection: "column",
         margin: "auto",
         alignItems: "center",
-        marginBlock: "80px",
+        marginTop: "80px",
         position: "relative",
       }}
     >
