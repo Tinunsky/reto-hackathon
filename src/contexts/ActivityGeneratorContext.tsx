@@ -1,87 +1,68 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
+import { CATEGORIES } from "../constants/CATEGORIES";
 
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
 type ActivityDetails = {
-  activity: string,
-  availability: number,
-  type: string,
-  participants: number,
-  price: number,
-  accessibility: string,
-  duration: string,
-  kidFriendly: boolean,
-  link: string,
-  key: string,
+  activity: string;
+  availability: number;
+  type: string;
+  participants: number;
+  price: number;
+  accessibility: string;
+  duration: string;
+  kidFriendly: boolean;
+  link: string;
+  key: string;
 };
 
 const defaultActivityGeneratorContext = {
-  getActivities: (() => { }) as (id: string) => void,
-  ActivitiesList: [] as ActivityDetails[],
-  setActivitiesList: (() => { }) as SetState<ActivityDetails[]>,
+  getActivities: (() => {}) as (id: string) => void,
+  selectedCategoryName: "",
+  setSelectedCategoryName: (() => {}) as SetState<string>,
+  currentActivity: "",
+  setCurrentActivity: (() => {}) as SetState<string>,
 };
 
 export const ActivityGeneratorContext = createContext<
   typeof defaultActivityGeneratorContext
 >(defaultActivityGeneratorContext);
 
-const hardcodedData = [
-  {
-    activity: "Learn Express.js",
-    availability: 0.25,
-    type: "education",
-    participants: 1,
-    price: 0.1,
-    accessibility: "Few to no challenges",
-    duration: "hours",
-    kidFriendly: true,
-    link: "https://expressjs.com/",
-    key: "3943506",
-  },
-  {
-    activity: "Learn React.js",
-    availability: 0.5,
-    type: "education",
-    participants: 1,
-    price: 0.2,
-    accessibility: "Some challenges",
-    duration: "hours",
-    kidFriendly: true,
-    link: "https://reactjs.org/",
-    key: "7890123",
-  },
-];
-
 export const ActivityGeneratorProvider = ({
   children,
 }: {
   children: ReactNode;
 }) => {
+  const [selectedCategoryName, setSelectedCategoryName] = useState("");
+  const [currentActivity, setCurrentActivity] = useState("");
 
-  const [ActivitiesList, setActivitiesList] = useState<ActivityDetails[]>([])
+  function getActivities(selectedCategoryName: string) {
+    const selectedCategoryNameEnglish = CATEGORIES[selectedCategoryName];
 
-  function getActivities() {
-    fetch("api/filter?type=education")
+    fetch(`api/filter?type=${selectedCategoryNameEnglish}`)
       .then((response) => response.json())
       .then((data) => {
         console.log("activity SUCCESS!", data);
-        setActivitiesList(data)
+        const activitiesList = data;
+        const getRandomInt = () => {
+          return Math.floor(Math.random() * activitiesList.length);
+        };
+        const randomNumber = getRandomInt();
+        setCurrentActivity(activitiesList[randomNumber]?.activity);
       })
-      .catch((error) => {console.log("activity ERROR", hardcodedData);
-      setActivitiesList(hardcodedData)});
+      .catch((error) => {
+        alert("Too many requests, please try again later.");
+      });
   }
-  
-  useEffect(() => {
-    console.log("ActivitiesList has been updated:", ActivitiesList);
-  }, [ActivitiesList]);  
-
 
   return (
     <ActivityGeneratorContext.Provider
       value={{
         getActivities,
-        ActivitiesList,
-        setActivitiesList,
+        selectedCategoryName,
+        setSelectedCategoryName,
+        currentActivity,
+        setCurrentActivity,
       }}
     >
       {children}

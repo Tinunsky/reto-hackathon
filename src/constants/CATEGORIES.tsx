@@ -1,10 +1,10 @@
-export const CATEGORIES = [
-    "Social",
-    "Educació",
-    "Caritat",
-    "Cuinar",
-    "Relaxació",
-    "Treball intens",
-  ];
+export const CATEGORIES: { [key: string]: string } = {
+  "Social": "social" ,
+  "Educació" : "education",
+  "Caritat": "charity",
+  "Cuinar": "cooking",
+  "Relaxació": "relaxation",
+  "Treball intens": "busywork"
+};
 
   

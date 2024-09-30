@@ -2,16 +2,17 @@ import { CategoryTab } from "./CategoryTab";
 import { ActivityGenerator } from "./ActivityGenerator";
 import { CATEGORIES } from "./constants/CATEGORIES";
 import { Header } from "./Header";
-import { useState } from "react";
+import { useContext } from "react";
 import { ActivityDisplay } from "./ActivityDisplay";
+import { ActivityGeneratorContext } from "./contexts/ActivityGeneratorContext";
 
 export default function App() {
 
-  const [selectedCategoryName, setSelectedCategoryName] = useState(""); 
-
+  const { selectedCategoryName, setSelectedCategoryName, setCurrentActivity } = useContext(ActivityGeneratorContext);
 
   const categorySelected = (categoryName: string) => {
     setSelectedCategoryName(categoryName);
+    setCurrentActivity("");
   };
 
   return (
@@ -25,7 +26,7 @@ export default function App() {
           marginBlock: "20px",
         }}
       >
-        {CATEGORIES.map((category) => (
+        {Object.keys(CATEGORIES).map((category) => (
           <CategoryTab
             key={crypto.randomUUID()}
             categoryName={category}

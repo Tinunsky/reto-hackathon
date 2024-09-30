@@ -2,17 +2,11 @@ import { useContext } from "react";
 import { ActivityGeneratorContext } from "./contexts/ActivityGeneratorContext";
 
 export function ActivityDisplay() {
-  const { ActivitiesList } = useContext(ActivityGeneratorContext);
-
-  const getRandomInt = () => {
-    return Math.floor(Math.random() * ActivitiesList.length);
-  };
-
-  const randomNumber = getRandomInt();
+  const { currentActivity } = useContext(ActivityGeneratorContext);
 
   return (
     <>
-      {ActivitiesList.length > 0 && (
+      {currentActivity && (
         <div
           style={{
             display: "flex",
@@ -21,13 +15,10 @@ export function ActivityDisplay() {
             width: "250px",
             margin: "auto",
             textAlign: "center",
-  
           }}
         >
           <h2>Activitat:</h2>
-          <div key={ActivitiesList[randomNumber].key}>
-          {ActivitiesList[randomNumber].activity}
-          </div>
+          <div>{currentActivity}</div>
         </div>
       )}
     </>

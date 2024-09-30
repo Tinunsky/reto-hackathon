@@ -3,7 +3,16 @@ import greenSmile from "./assets/green_smile.png";
 import { ActivityGeneratorContext } from "./contexts/ActivityGeneratorContext";
 
 export function ActivityGenerator() {
-  const { getActivities } = useContext(ActivityGeneratorContext);
+  const { getActivities, selectedCategoryName } =
+    useContext(ActivityGeneratorContext);
+
+  const handleGenerate = () => {
+    if (selectedCategoryName) {
+      getActivities(selectedCategoryName);
+    } else {
+      alert("Please select a category before generating an activity.");
+    }
+  };
 
   return (
     <div
@@ -49,7 +58,7 @@ export function ActivityGenerator() {
             padding: "10px 20px",
             cursor: "pointer",
           }}
-          onClick={() => getActivities()}
+          onClick={handleGenerate}
         >
           Generar
         </div>
