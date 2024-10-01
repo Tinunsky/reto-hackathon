@@ -1,4 +1,4 @@
-export function CategoryTab({
+export function CategoryButton({
   categoryName,
   isSelected,
   onClick,

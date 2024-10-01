@@ -1,4 +1,4 @@
-import { CategoryTab } from "./CategoryTab";
+import { CategoryButton } from "./CategoryButton";
 import { ActivityGenerator } from "./ActivityGenerator";
 import { CATEGORIES } from "./constants/CATEGORIES";
 import { Header } from "./Header";
@@ -7,7 +7,6 @@ import { ActivityDisplay } from "./ActivityDisplay";
 import { ActivityGeneratorContext } from "./contexts/ActivityGeneratorContext";
 
 export default function App() {
-
   const {
     selectedCategoryName,
     setSelectedCategoryName,
@@ -21,19 +20,11 @@ export default function App() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="main-wrapper">
       <Header />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBlock: "20px",
-          flexWrap: "wrap",
-          gap: "10px",
-        }}
-      >
+      <div className="category-tab">
         {Object.keys(CATEGORIES).map((category) => (
-          <CategoryTab
+          <CategoryButton
             key={crypto.randomUUID()}
             categoryName={category}
             isSelected={selectedCategoryName === category}
@@ -41,7 +32,13 @@ export default function App() {
           />
         ))}
       </div>
-      <div className={`${displayActivityText ? 'lg:flex lg:justify-between lg:center lg:m-auto lg:w-1/2 w-full' : 'w-full'}`}>
+      <div
+        className={`${
+          displayActivityText
+            ? "lg:flex lg:justify-between lg:center lg:m-auto lg:w-1/2 w-full"
+            : "w-full"
+        }`}
+      >
         <ActivityGenerator />
         <ActivityDisplay />
       </div>

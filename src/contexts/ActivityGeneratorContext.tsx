@@ -24,7 +24,7 @@ export const ActivityGeneratorProvider = ({
 }) => {
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
   const [currentActivity, setCurrentActivity] = useState("");
-  const [displayActivityText, setDisplayActivityText] = useState(false)
+  const [displayActivityText, setDisplayActivityText] = useState(false);
 
   function getActivities(selectedCategoryName: string) {
     const selectedCategoryNameEnglish = CATEGORIES[selectedCategoryName];

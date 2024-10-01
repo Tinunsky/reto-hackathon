@@ -1,50 +1,22 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Generador de Actividades
+Esta aplicación web permite a los usuarios generar actividades aleatorias para realizar en momentos de aburrimiento. Los usuarios pueden seleccionar una categoría de actividades y, a través de una conexión a una API, se les mostrará una actividad específica según la selección realizada.
 
-Currently, two official plugins are available:
+Características
+- Selección de categoría: Los usuarios pueden seleccionar entre diferentes categorías de actividades.
+- Generador de actividades: Una vez seleccionada la categoría, los usuarios pueden generar una actividad aleatoria.
+- Responsividad: La interfaz está optimizada para verse bien tanto en dispositivos móviles como en pantallas más grandes.
+- Diseño amigable: La aplicación presenta una interfaz atractiva y fácil de usar.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Requisitos Técnicos
+- API: La aplicación obtiene actividades a través de la API Bored API.
+- Estilo y diseño: Utiliza CSS para hacer la aplicación lo más atractiva posible.
+- Responsive: La aplicación es completamente responsiva y se ve bien en dispositivos móviles y de escritorio.
 
-## Expanding the ESLint configuration
+# Instrucciones de Uso
+- Selecciona una categoría de las disponibles.
+- Haz clic en el botón Generar para obtener una actividad aleatoria.
+- La actividad generada se mostrará en pantalla.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+# Este proyecto fue desarrollado como parte del Hackató Saló Ocupació 2024.
