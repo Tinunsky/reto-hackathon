@@ -41,7 +41,8 @@ export const ActivityGeneratorProvider = ({
         setCurrentActivity(activitiesList[randomNumber]?.activity);
         setDisplayActivityText(true);
       })
-      .catch((_error) => {
+      .catch((error) => {
+        console.log("Error", error)
         alert("Too many requests, please try again later.");
       });
   }
