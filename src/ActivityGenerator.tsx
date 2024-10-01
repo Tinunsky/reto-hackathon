@@ -22,7 +22,6 @@ export function ActivityGenerator() {
         margin: "auto",
         alignItems: "center",
         marginTop: "80px",
-        position: "relative",
       }}
     >
       <div

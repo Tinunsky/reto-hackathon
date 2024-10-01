@@ -3,25 +3,14 @@ import { CATEGORIES } from "../constants/CATEGORIES";
 
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
-type ActivityDetails = {
-  activity: string;
-  availability: number;
-  type: string;
-  participants: number;
-  price: number;
-  accessibility: string;
-  duration: string;
-  kidFriendly: boolean;
-  link: string;
-  key: string;
-};
-
 const defaultActivityGeneratorContext = {
   getActivities: (() => {}) as (id: string) => void,
   selectedCategoryName: "",
   setSelectedCategoryName: (() => {}) as SetState<string>,
   currentActivity: "",
   setCurrentActivity: (() => {}) as SetState<string>,
+  displayActivityText: false,
+  setDisplayActivityText: (() => {}) as SetState<boolean>,
 };
 
 export const ActivityGeneratorContext = createContext<
@@ -35,6 +24,7 @@ export const ActivityGeneratorProvider = ({
 }) => {
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
   const [currentActivity, setCurrentActivity] = useState("");
+  const [displayActivityText, setDisplayActivityText] = useState(false)
 
   function getActivities(selectedCategoryName: string) {
     const selectedCategoryNameEnglish = CATEGORIES[selectedCategoryName];
@@ -49,6 +39,7 @@ export const ActivityGeneratorProvider = ({
         };
         const randomNumber = getRandomInt();
         setCurrentActivity(activitiesList[randomNumber]?.activity);
+        setDisplayActivityText(true);
       })
       .catch((error) => {
         alert("Too many requests, please try again later.");
@@ -63,6 +54,8 @@ export const ActivityGeneratorProvider = ({
         setSelectedCategoryName,
         currentActivity,
         setCurrentActivity,
+        displayActivityText,
+        setDisplayActivityText,
       }}
     >
       {children}

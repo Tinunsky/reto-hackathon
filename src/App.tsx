@@ -8,7 +8,12 @@ import { ActivityGeneratorContext } from "./contexts/ActivityGeneratorContext";
 
 export default function App() {
 
-  const { selectedCategoryName, setSelectedCategoryName, setCurrentActivity } = useContext(ActivityGeneratorContext);
+  const {
+    selectedCategoryName,
+    setSelectedCategoryName,
+    setCurrentActivity,
+    displayActivityText,
+  } = useContext(ActivityGeneratorContext);
 
   const categorySelected = (categoryName: string) => {
     setSelectedCategoryName(categoryName);
@@ -16,14 +21,15 @@ export default function App() {
   };
 
   return (
-    <>
+    <div style={{ padding: "20px" }}>
       <Header />
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          flexDirection: "row",
           marginBlock: "20px",
+          flexWrap: "wrap",
+          gap: "10px",
         }}
       >
         {Object.keys(CATEGORIES).map((category) => (
@@ -35,8 +41,10 @@ export default function App() {
           />
         ))}
       </div>
-      <ActivityGenerator />
-      <ActivityDisplay />
-    </>
+      <div className={`${displayActivityText ? 'lg:flex lg:justify-between lg:center lg:m-auto lg:w-1/2 w-full' : 'w-full'}`}>
+        <ActivityGenerator />
+        <ActivityDisplay />
+      </div>
+    </div>
   );
 }
